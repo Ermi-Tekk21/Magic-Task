@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,8 +55,8 @@
 
     </style>
 
-    {% block extra_css %}
-    {% endblock %}
+     <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
 
 </head>
 
