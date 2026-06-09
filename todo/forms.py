@@ -18,13 +18,13 @@ class TaskForm(forms.ModelForm):
 
     def clean_title(self):
 
-        title = self.cleaned_data.get("title")
+        title = self.cleaned_data.get("title").strip()
 
         if not title:
 
             raise forms.ValidationError("Title cannot be empty")
 
-        if Task.objects.filter(title=title).exists():
+        if Task.objects.filter(title__iexact=title).exists():
 
             raise forms.ValidationError("This task already exists")
 

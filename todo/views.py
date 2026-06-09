@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect  # type: ignore[import]
 from .models import Task
 from .forms import TaskForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def task_list(request):
 
     if request.method == "POST":
