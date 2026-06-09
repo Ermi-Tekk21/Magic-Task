@@ -12,7 +12,11 @@ def task_list(request):
 
         if form.is_valid():
 
-            form.save()
+            task = form.save(commit=False)
+
+            task.user = request.user
+
+            task.save()
 
             return redirect("/")
 
@@ -20,7 +24,9 @@ def task_list(request):
 
         form = TaskForm()
 
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(
+        user=request.user
+    )
 
     return render(
         request,
