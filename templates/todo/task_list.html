@@ -20,9 +20,7 @@ Todo App
     <form method="POST" class="add-task">
 
         {% csrf_token %}
-
-        <input type="text" name="title" placeholder="What needs to be done?" class="task-input" required>
-
+        {{ form.title }}
         <button type="submit" class="add-btn">
             Add
         </button>

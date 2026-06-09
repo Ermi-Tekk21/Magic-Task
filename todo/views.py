@@ -1,24 +1,32 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect  # type: ignore[import]
 from .models import Task
+from .forms import TaskForm
 
 def task_list(request):
+
     if request.method == "POST":
 
-        title = request.POST.get("title")
+        form = TaskForm(request.POST)
 
-        if title:
+        if form.is_valid():
 
-            Task.objects.create(
-                title=title
-            )
+            form.save()
+
             return redirect("/")
-        
+
+    else:
+
+        form = TaskForm()
+
     tasks = Task.objects.all()
 
     return render(
         request,
         "todo/task_list.html",
-        {"tasks": tasks}
+        {
+            "tasks": tasks,
+            "form": form
+        }
     )
     
 def complete_task(request, id):
