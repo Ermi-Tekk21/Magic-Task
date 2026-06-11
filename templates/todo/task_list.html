@@ -3,7 +3,7 @@
 
 <!-- title block -->
 {% block title %}
-Todo App
+My Tasks — Magic Task
 {% endblock %}
 
 
@@ -11,10 +11,20 @@ Todo App
 {% block content %}
 <div class="container">
 
-    <h1>📝 Todo App</h1>
+    <div class="app-header">
+        <h1><span class="header-icon">✦</span> My Tasks</h1>
+    </div>
 
     <div class="stats">
-        Total Tasks: {{ tasks|length }}
+        <span class="stat-badge stat-total">
+            📋 {{ tasks|length }} Total
+        </span>
+        {% with completed_count=0 %}
+        {% for task in tasks %}
+            {% if task.completed %}
+            {% endif %}
+        {% endfor %}
+        {% endwith %}
     </div>
 
     <form method="POST" class="add-task">
@@ -22,7 +32,7 @@ Todo App
         {% csrf_token %}
         {{ form.title }}
         <button type="submit" class="add-btn">
-            Add
+            <span>＋</span> Add
         </button>
 
     </form>
@@ -31,7 +41,7 @@ Todo App
 
         {% for task in tasks %}
 
-        <li class="task-item">
+        <li class="task-item" style="animation-delay: {{ forloop.counter0 }}00ms;">
 
             <div class="task-left">
 
@@ -56,15 +66,17 @@ Todo App
             </div>
 
             <a href="/delete/{{ task.id }}/" class="delete-btn">
-                Delete
+                ✕ Delete
             </a>
 
         </li>
 
         {% empty %}
 
-        <li style="text-align:center; padding:20px; color:#888;">
-            No tasks yet. Add your first task
+        <li class="empty-state">
+            <span class="empty-icon">📝</span>
+            <p>No tasks yet</p>
+            <p class="empty-sub">Add your first task above to get started</p>
         </li>
 
         {% endfor %}
