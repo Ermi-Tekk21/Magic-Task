@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Login
+Sign In — Magic Task
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<div class="login-container">
 
-    <h1>Login</h1>
+    <span class="login-icon">🔐</span>
+    <h1>Welcome Back</h1>
+    <p class="login-subtitle">Sign in to access your tasks</p>
 
     <form method="POST">
 
@@ -17,7 +19,7 @@ Login
         {{ form.as_p }}
 
         <button type="submit">
-            Login
+            Sign In
         </button>
 
     </form>

@@ -6,52 +6,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Magic Task — A beautiful, modern todo application to organize your life.">
 
     <title>
-        {% block title %}
-        {% endblock %}
+        {% block title %}Magic Task{% endblock %}
     </title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f9;
-            color: #333;
-        }
-
-        nav {
-            background: #2c3e50;
-            padding: 15px 30px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-right: 20px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            opacity: 0.8;
-        }
-
-        .page-container {
-            padding: 20px;
-        }
-
-        footer {
-            text-align: center;
-            color: #777;
-            margin-top: 40px;
-            padding: 20px;
-        }
-    </style>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -60,25 +24,32 @@
 <body>
 
     <nav>
+        <div class="nav-left">
+            <a href="/" class="nav-brand">
+                <span class="brand-icon">✦</span>
+                Magic Task
+            </a>
+        </div>
 
-        <a href="/">Home</a>
+        <div class="nav-right">
+            {% if user.is_authenticated %}
 
-        {% if user.is_authenticated %}
+            <span class="nav-user">
+                Hello, <span class="username">{{ user.username }}</span>
+            </span>
 
-        Welcome {{ user.username }}
+            <a href="{% url 'logout' %}" class="nav-logout-btn">
+                Logout
+            </a>
 
-        <a href="{% url 'logout' %}">
-            Logout
-        </a>
+            {% else %}
 
-        {% else %}
+            <a href="/accounts/login/" class="nav-login-btn">
+                Sign In
+            </a>
 
-        <a href="/accounts/login/">
-            Login
-        </a>
-
-        {% endif %}
-
+            {% endif %}
+        </div>
     </nav>
 
     <div class="page-container">
@@ -88,8 +59,8 @@
 
     </div>
 
-    <footer style="background-color: #e0e0e0;">
-        Django Todo App • Learning Project
+    <footer>
+        Made with <span class="footer-heart">♥</span> using Django
     </footer>
 
 </body>
