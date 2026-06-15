@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.task_list),
+    path('signup/', views.signup, name='signup'),
 
     path('complete/<int:id>/', views.complete_task),
     path('toggle/<int:id>/', views.toggle_task),

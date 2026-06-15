@@ -24,6 +24,11 @@ Sign In — Magic Task
 
     </form>
 
+    <div style="margin-top: 24px; text-align: center;">
+        <span style="color: var(--text-secondary); font-size: 0.875rem;">Don't have an account? </span>
+        <a href="{% url 'signup' %}" style="color: var(--accent-hover); font-size: 0.875rem; text-decoration: none; font-weight: 600; transition: color var(--transition-fast);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--accent-hover)'">Sign Up</a>
+    </div>
+
 </div>
 
 {% endblock %}
