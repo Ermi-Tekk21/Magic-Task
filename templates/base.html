@@ -44,8 +44,12 @@
 
             {% else %}
 
-            <a href="/accounts/login/" class="nav-login-btn">
+            <a href="{% url 'login' %}">
                 Sign In
+            </a>
+
+            <a href="{% url 'signup' %}" class="nav-login-btn">
+                Sign Up
             </a>
 
             {% endif %}
