@@ -198,12 +198,20 @@ nav a:hover {
     border: 1px solid var(--border) !important;
 }
 
-/* ---------- Page Container ---------- */
-.page-container {
+/* ---------- Page Wrapper (outer column layout) ---------- */
+.page-wrapper {
     position: relative;
     z-index: 1;
     flex: 1;
-    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+/* ---------- Page Container ---------- */
+.page-container {
+    flex: 1;
+    padding: 32px 0 40px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -759,4 +767,148 @@ footer .footer-heart {
     .task-item {
         gap: 8px;
     }
+}
+
+/* =========================================
+   Feature Cards Strip
+   ========================================= */
+.feature-cards-strip {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 0 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.feature-cards-strip::-webkit-scrollbar {
+    display: none;
+}
+
+.feature-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    min-width: 150px;
+    padding: 1.2rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-secondary, #aaa);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex: 1;
+    text-align: center;
+    user-select: none;
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.feature-card.active {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: rgba(99, 102, 241, 0.6);
+    color: #a5b4fc;
+}
+
+.feature-card-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.feature-card-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: inherit;
+}
+
+.feature-card-desc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.4);
+}
+
+.coming-soon-badge {
+    font-size: 0.62rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border-radius: 999px;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    margin-top: 0.2rem;
+}
+
+/* =========================================
+   Coming Soon Modal
+   ========================================= */
+.cs-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.cs-modal-overlay.visible {
+    display: flex;
+}
+
+.cs-modal-box {
+    background: #1e1e2e;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    animation: popIn 0.25s ease;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.cs-modal-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.cs-modal-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
+}
+
+.cs-modal-text {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+
+.cs-modal-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 0.6rem 2rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.cs-modal-btn:hover {
+    opacity: 0.85;
 }

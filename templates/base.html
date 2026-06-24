@@ -56,12 +56,73 @@
         </div>
     </nav>
 
-    <div class="page-container">
+<div class="page-wrapper">
 
-        {% block content %}
-        {% endblock %}
+    {% if user.is_authenticated %}
+    <!-- Feature Cards Strip -->
+    <div class="feature-cards-strip">
+
+        <!-- Card 1: Simple To-Do (ACTIVE - goes to /) -->
+        <a href="/" class="feature-card {% if request.path == '/' %}active{% endif %}">
+            <div class="feature-card-icon">📋</div>
+            <div class="feature-card-title">Simple To-Do</div>
+            <div class="feature-card-desc">Manage your daily tasks</div>
+        </a>
+
+        <!-- Card 2: AI Task Breakdown (Coming Soon) -->
+        <div class="feature-card coming-soon" onclick="showComingSoon('AI Task Breakdown')">
+            <div class="feature-card-icon">🤖</div>
+            <div class="feature-card-title">AI Task Breakdown</div>
+            <div class="feature-card-desc">Break goals into steps</div>
+            <span class="coming-soon-badge">Coming Soon</span>
+        </div>
+
+        <!-- Card 3: Smart Priority Ranking (Coming Soon) -->
+        <div class="feature-card coming-soon" onclick="showComingSoon('Smart Priority Ranking')">
+            <div class="feature-card-icon">🔥</div>
+            <div class="feature-card-title">Smart Priority</div>
+            <div class="feature-card-desc">AI ranks your tasks</div>
+            <span class="coming-soon-badge">Coming Soon</span>
+        </div>
+
+        <!-- Card 4: Daily Planner (Coming Soon) -->
+        <div class="feature-card coming-soon" onclick="showComingSoon('Daily Planner')">
+            <div class="feature-card-icon">📅</div>
+            <div class="feature-card-title">Daily Planner</div>
+            <div class="feature-card-desc">AI-scheduled day plan</div>
+            <span class="coming-soon-badge">Coming Soon</span>
+        </div>
 
     </div>
+
+    <!-- Coming Soon Modal (only for authenticated users) -->
+    <div id="coming-soon-modal" class="cs-modal-overlay" onclick="hideComingSoon()">
+        <div class="cs-modal-box" onclick="event.stopPropagation()">
+            <div class="cs-modal-icon">🚀</div>
+            <h2 class="cs-modal-title" id="cs-modal-feature-name">Coming Soon</h2>
+            <p class="cs-modal-text">This feature is under construction. Stay tuned!</p>
+            <button class="cs-modal-btn" onclick="hideComingSoon()">Got it</button>
+        </div>
+    </div>
+
+    <script>
+        function showComingSoon(featureName) {
+            document.getElementById('cs-modal-feature-name').textContent = featureName + ' — Coming Soon';
+            document.getElementById('coming-soon-modal').classList.add('visible');
+        }
+        function hideComingSoon() {
+            document.getElementById('coming-soon-modal').classList.remove('visible');
+        }
+    </script>
+    {% endif %}
+
+    <div class="page-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</div>
+
 
     <footer>
         Made with <span class="footer-heart">♥</span> using Django
