@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Smart Priority — Magic Task{% endblock %}
+
+{% block content %}
+<div class="container ai-breakdown-container sp-container">
+
+    <div class="app-header">
+        <h1><span class="header-icon">🔥</span> Smart Priority Ranking</h1>
+        <p class="ai-subtitle">Let AI prioritize your incomplete tasks by urgency and impact</p>
+    </div>
+
+    {% if error %}
+    <div class="ai-error">⚠️ {{ error }}</div>
+    {% endif %}
+
+    {% if not tasks %}
+    <!-- Empty State -->
+    <div class="empty-state">
+        <span class="empty-icon">🎉</span>
+        <p>No incomplete tasks to prioritize</p>
+        <p class="empty-sub">Add some tasks in the Simple To-Do list first!</p>
+        <div style="margin-top: 24px;">
+            <a href="/" class="btn-primary-gradient" style="display: inline-block;">Go to To-Do List</a>
+        </div>
+    </div>
+    {% else %}
+
+        {% if not prioritized_tasks %}
+        <!-- Pre-Ranking Preview State -->
+        <div class="sp-preview-box">
+            <h3 class="sp-section-title">Incomplete Tasks ({{ tasks|length }})</h3>
+            <ul class="sp-preview-list">
+                {% for task in tasks %}
+                <li class="sp-preview-item">
+                    <span class="sp-bullet">✦</span>
+                    <span class="sp-text">{{ task.title }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <form method="POST" onsubmit="showLoading()">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="rank">
+                <button type="submit" class="ai-generate-btn sp-rank-btn" id="rank-btn">
+                    <span class="btn-icon">⚡</span>
+                    <span class="btn-text">Rank My Tasks</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Loading State Overlay -->
+        <div id="sp-loading-overlay" class="sp-loading-overlay" style="display: none;">
+            <div class="sp-loading-spinner-box">
+                <div class="sp-spinner"></div>
+                <h3>Analyzing Tasks...</h3>
+                <p>AI is assessing urgency, dependencies, and impact to build the optimal sequence.</p>
+            </div>
+        </div>
+
+        <script>
+            function showLoading() {
+                document.getElementById('sp-loading-overlay').style.display = 'flex';
+                document.getElementById('rank-btn').disabled = true;
+            }
+        </script>
+
+        {% else %}
+        <!-- Ranked Results State -->
+        <div class="ai-results">
+            <div class="ai-results-header">
+                <span class="ai-results-title">🔥 AI Prioritized Order</span>
+                <span class="ai-results-count">{{ prioritized_tasks|length }} Ranked</span>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="apply">
+                
+                <div class="sp-ranked-list">
+                    {% for task in prioritized_tasks %}
+                    <input type="hidden" name="task_ids" value="{{ task.id }}">
+                    <div class="sp-rank-card" style="animation-delay: {{ forloop.counter0 }}00ms;">
+                        <div class="sp-rank-left">
+                            <span class="sp-rank-number">#{{ forloop.counter }}</span>
+                        </div>
+                        <div class="sp-rank-middle">
+                            <div class="sp-rank-title-row">
+                                <span class="sp-rank-title">{{ task.title }}</span>
+                                <span class="sp-badge {{ task.priority_class }}">{{ task.priority_level }}</span>
+                            </div>
+                            <p class="sp-rank-reason">{{ task.reason }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="ai-actions sp-actions">
+                    <button type="submit" class="ai-save-btn sp-apply-btn">
+                        🚀 Apply This Order to My List
+                    </button>
+                    <a href="/smart-priority/" class="ai-regenerate-btn">↺ Rank Again</a>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+
+    {% endif %}
+
+</div>
+{% endblock %}

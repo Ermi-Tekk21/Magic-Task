@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete/<int:id>/', views.delete_task),
 
     path('ai-breakdown/', views.ai_breakdown, name='ai_breakdown'),
+    path('smart-priority/', views.smart_priority, name='smart_priority'),
 ]
