@@ -8,4 +8,6 @@ urlpatterns = [
     path('complete/<int:id>/', views.complete_task),
     path('toggle/<int:id>/', views.toggle_task),
     path('delete/<int:id>/', views.delete_task),
+
+    path('ai-breakdown/', views.ai_breakdown, name='ai_breakdown'),
 ]

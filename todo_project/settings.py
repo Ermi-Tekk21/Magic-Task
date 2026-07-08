@@ -139,3 +139,6 @@ STORAGES = {
     },
 }
 LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
+
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')

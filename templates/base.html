@@ -70,12 +70,12 @@
         </a>
 
         <!-- Card 2: AI Task Breakdown (Coming Soon) -->
-        <div class="feature-card coming-soon" onclick="showComingSoon('AI Task Breakdown')">
-            <div class="feature-card-icon">🤖</div>
-            <div class="feature-card-title">AI Task Breakdown</div>
-            <div class="feature-card-desc">Break goals into steps</div>
-            <span class="coming-soon-badge">Coming Soon</span>
-        </div>
+        <!-- Card 2: AI Task Breakdown (now ACTIVE - links to page) -->
+<a href="/ai-breakdown/" class="feature-card {% if '/ai-breakdown/' in request.path %}active{% endif %}">
+    <div class="feature-card-icon">🤖</div>
+    <div class="feature-card-title">AI Task Breakdown</div>
+    <div class="feature-card-desc">Break goals into steps</div>
+</a>
 
         <!-- Card 3: Smart Priority Ranking (Coming Soon) -->
         <div class="feature-card coming-soon" onclick="showComingSoon('Smart Priority Ranking')">
