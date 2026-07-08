@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Task Breakdown — Magic Task{% endblock %}
+
+{% block content %}
+<div class="container ai-breakdown-container">
+
+    <div class="app-header">
+        <h1><span class="header-icon">🤖</span> AI Task Breakdown</h1>
+        <p class="ai-subtitle">Describe your goal — AI will break it into actionable tasks</p>
+    </div>
+
+    <!-- Goal Input Form -->
+    <form method="POST" id="breakdown-form">
+        {% csrf_token %}
+        <div class="ai-input-group">
+            <input
+                type="text"
+                name="goal"
+                id="goal-input"
+                class="ai-goal-input"
+                placeholder="e.g. Build EthSwitch Simulation"
+                value="{{ goal }}"
+                required
+                autocomplete="off"
+            >
+            <button type="submit" class="ai-generate-btn" id="generate-btn">
+                <span class="btn-icon">✦</span>
+                <span class="btn-text">Generate</span>
+            </button>
+        </div>
+    </form>
+
+    {% if error %}
+    <div class="ai-error">⚠️ {{ error }}</div>
+    {% endif %}
+
+    {% if generated_tasks %}
+    <!-- Generated Tasks List -->
+    <div class="ai-results">
+        <div class="ai-results-header">
+            <span class="ai-results-title">Generated Tasks for: <strong>{{ goal }}</strong></span>
+            <span class="ai-results-count">{{ generated_tasks|length }} tasks</span>
+        </div>
+
+        <form method="POST" id="save-form">
+            {% csrf_token %}
+            <input type="hidden" name="goal" value="{{ goal }}">
+            <input type="hidden" name="save_tasks" value="1">
+
+            <ul class="ai-task-list">
+                {% for task in generated_tasks %}
+                <li class="ai-task-item">
+                    <label class="ai-task-label">
+                        <input type="checkbox" name="task_titles" value="{{ task }}" checked class="ai-checkbox">
+                        <span class="ai-task-text">{{ task }}</span>
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div class="ai-actions">
+                <button type="submit" class="ai-save-btn">
+                    ✅ Save Selected Tasks to My List
+                </button>
+                <a href="/ai-breakdown/" class="ai-regenerate-btn">↺ Try Again</a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

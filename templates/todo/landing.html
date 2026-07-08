@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Magic Task — Organize Your Life with AI{% endblock %}
+
+{% block content %}
+<div class="landing-hero-container">
+
+    <!-- Hero Header -->
+    <div class="landing-hero">
+        <span class="hero-badge">✦ Premium Productivity Suite</span>
+        <h1 class="hero-title">Organize your life.<br>Power up with <span class="gradient-text">AI</span>.</h1>
+        <p class="hero-subtitle">
+            Magic Task is a beautiful, minimal todo application that helps you organize your daily work and break down large goals using artificial intelligence.
+        </p>
+        
+        <div class="hero-cta-buttons">
+            <a href="{% url 'signup' %}" class="btn-primary-gradient">Get Started Free</a>
+            <a href="{% url 'login' %}" class="btn-secondary-border">Sign In</a>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="landing-features-grid">
+        <h2 class="grid-title">Supercharge your productivity</h2>
+        
+        <div class="features-cards-grid">
+            <!-- Feature Card 1 -->
+            <div class="landing-feature-card">
+                <div class="feature-icon-wrapper">📋</div>
+                <h3>Simple To-Do</h3>
+                <p>Quickly add, complete, and track tasks. Elegant interface designed for focus.</p>
+            </div>
+
+            <!-- Feature Card 2 -->
+            <div class="landing-feature-card">
+                <div class="feature-icon-wrapper">🤖</div>
+                <h3>AI Task Breakdown</h3>
+                <p>Convert huge goals like "Build EthSwitch Simulation" into bite-sized actionable items instantly.</p>
+            </div>
+
+            <!-- Feature Card 3 -->
+            <div class="landing-feature-card">
+                <div class="feature-icon-wrapper">🔥</div>
+                <h3>Smart Priority</h3>
+                <p>Use AI to prioritize and organize tasks based on their actual career and life impact.</p>
+            </div>
+
+            <!-- Feature Card 4 -->
+            <div class="landing-feature-card">
+                <div class="feature-icon-wrapper">📅</div>
+                <h3>Daily Planner</h3>
+                <p>Plan your day with micro-scheduling. AI schedules your daily tasks around your routines.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
